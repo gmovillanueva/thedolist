@@ -62,3 +62,7 @@ yarn-debug.log*
 # Ignore master key for decrypting credentials and more.
 /config/initializers/secret_token.rb
 /config/master.key
+
+/tmp/
+/log/
+/storage/
