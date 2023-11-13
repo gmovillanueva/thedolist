@@ -1,33 +1,29 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { fetchTodos } from "@utils/api/fetchTodos.js";
+import { Title } from "@components/Title.jsx";
+import { NewTaskField } from "@components/NewTaskField.jsx";
+import { InformationTabs} from "@components/InformationTabs.jsx";
+import { TaskCard } from "@components/TaskCard.jsx";
 
-function App() {
-  const [count, setCount] = useState(0)
 
+async function App() {
+  const todoList = await fetchTodos();
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <section className="bg-gray-100 text-gray-800 h-screen">
+        <div
+            className="container mx-auto flex flex-col items-center px-4 py-16 text-center md:py-32 md:px-10 lg:px-32 xl:max-w-3xl"
+        >
+          <Title />
+          <NewTaskField />
+          <InformationTabs />
+
+          {todoList?.map(
+
+          )}
+          <TaskCard />
+
+        </div>
+      </section>
     </>
   )
 }

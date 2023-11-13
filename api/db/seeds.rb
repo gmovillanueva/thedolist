@@ -8,19 +8,16 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 Todo.create(
-  title: "Groceries",
   description: "1x Milk, 2x Eggs, 3x Peanuts",
   is_completed: false,
   is_pending: true
   )
 Todo.create(
-  title: "Change Bulbs",
   description: "Change the lightbulbs outside the yard",
   is_completed: true,
   is_pending: false
 )
 Todo.create(
-  title: "Feed the dog",
   description: "^",
   is_completed: true,
   is_pending: false
