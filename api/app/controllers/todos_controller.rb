@@ -21,7 +21,6 @@ class TodosController < ApplicationController
 
   # Le U in CRUD
   def update
-    puts request.body.read
     todo = Todo.find(params[:id])
     todo.update(todo_param)
     render json: todo
