@@ -1,4 +1,4 @@
-import {isNil, isEmpty, mergeDeepRight} from "ramda";
+import { isNil, isEmpty, mergeDeepRight } from 'ramda';
 
 const contentTypeJSON = 'application/json';
 
@@ -15,11 +15,10 @@ const DEFAULT_OPTIONS = {
 };
 
 // Simple function for header configuration left for possibility of scaling
-const headerConfig = (options = {}) =>
-{
+const headerConfig = (options = {}) => {
   const header = {};
   return mergeDeepRight(header, options);
-}
+};
 
 // Function to post to api
 export const postOptions = (body, methodName = 'POST') => ({
@@ -37,9 +36,9 @@ export const postOptions = (body, methodName = 'POST') => ({
 
 // Function to allow for patch operations
 export const patchOptions = (
-    body,
-    methodName = 'PATCH',
-    jsonOutput = true
+  body,
+  methodName = 'PATCH',
+  jsonOutput = true
 ) => ({
   method: methodName,
   mode: 'cors',
@@ -58,22 +57,22 @@ export const patchOptions = (
 export async function checkStatus(fetchResponse) {
   // Fetch was okay. Yay!
   if (fetchResponse.ok) {
-    return fetchResponse
+    return fetchResponse;
   }
   // Data retrieval
   const data = await fetchResponse.json();
   const error = new Error(
-      `${fetchResponse.status}: "${fetchResponse.statusText}"`
+    `${fetchResponse.status}: "${fetchResponse.statusText}"`
   );
 
   throw {
     error,
     data,
-  }
+  };
 }
 
 // Create
-export async function doFetch(route, options = {}){
+export async function doFetch(route, options = {}) {
   const fetchOptions = mergeDeepRight(DEFAULT_OPTIONS, headerConfig(options));
   try {
     const response = await fetch(route, fetchOptions);
@@ -88,4 +87,3 @@ export async function doFetch(route, options = {}){
     return { status: errorCode, data: { stuff: 'empty' }, ...error };
   }
 }
-
