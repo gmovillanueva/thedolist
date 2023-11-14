@@ -10,15 +10,12 @@
 Todo.create(
   description: "1x Milk, 2x Eggs, 3x Peanuts",
   is_completed: false,
-  is_pending: true
   )
 Todo.create(
   description: "Change the lightbulbs outside the yard",
   is_completed: true,
-  is_pending: false
 )
 Todo.create(
   description: "^",
   is_completed: true,
-  is_pending: false
 )

@@ -21,6 +21,7 @@ class TodosController < ApplicationController
 
   # Le U in CRUD
   def update
+    puts request.body.read
     todo = Todo.find(params[:id])
     todo.update(todo_param)
     render json: todo
@@ -40,6 +41,6 @@ class TodosController < ApplicationController
   end
 
   def todo_param
-    params.require(:todo).permit(:description, :is_completed, :is_pending)
+    params.require(:todo).permit(:description, :is_completed)
   end
 end
