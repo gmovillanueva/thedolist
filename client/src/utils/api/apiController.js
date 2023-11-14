@@ -2,7 +2,7 @@ import { isNil, isEmpty, mergeDeepRight } from 'ramda';
 
 const contentTypeJSON = 'application/json';
 
-export const railsAPI = 'http://localhost:3000/';
+export const railsAPI = 'http://localhost:3000';
 
 // Accepts only JSON from any GET
 const DEFAULT_OPTIONS = {
@@ -19,6 +19,19 @@ const headerConfig = (options = {}) => {
   const header = {};
   return mergeDeepRight(header, options);
 };
+
+export const deleteOptions = (body, methodName = 'DELETE') => ({
+  method: methodName,
+  mode: 'cors',
+  cache: 'no-cache',
+  headers: {
+    ...(!isNil(body) && !isEmpty(body) && { 'Content-Type': contentTypeJSON }),
+    Accept: 'application/json',
+  },
+  redirect: 'follow',
+  referer: 'no-referrer',
+  body: JSON.stringify(body),
+});
 
 // Function to post to api
 export const postOptions = (body, methodName = 'POST') => ({
