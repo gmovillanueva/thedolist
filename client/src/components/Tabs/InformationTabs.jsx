@@ -27,6 +27,7 @@ export function InformationTabs({ todoList, itemCount }) {
         return todo;
       }
     }
+
     const data = filter(ramdaFilter, todoList);
     setTodoData(data);
   }
@@ -37,6 +38,7 @@ export function InformationTabs({ todoList, itemCount }) {
         return todo;
       }
     }
+
     const data = filter(ramdaFilter, todoList);
     setTodoData(data);
   }

@@ -30,9 +30,9 @@ const editTask = (taskData) => {
   );
 };
 
-export const useEditTask = ({ key }) =>
+export const useEditTask = () =>
   useMutation(editTask, {
-    mutationKey: key,
+    mutationKey: 'createEditTask',
     onSuccess: (data) => data,
   });
 

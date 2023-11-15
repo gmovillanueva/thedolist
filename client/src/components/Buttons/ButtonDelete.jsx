@@ -1,5 +1,5 @@
 import { TrashSimple } from '@phosphor-icons/react';
-import { useDeleteTask } from '@utils/api/queryTask.jsx';
+import { useDeleteTask } from '@utils/api/queryTask.js';
 import PropTypes from 'prop-types';
 
 export function ButtonDelete({ id }) {

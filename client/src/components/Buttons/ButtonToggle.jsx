@@ -1,7 +1,7 @@
 import { Controller, useForm } from 'react-hook-form';
 
 import PropTypes from 'prop-types';
-import { useEditTask } from '@utils/api/queryTask.jsx';
+import { useEditTask } from '@utils/api/queryTask.js';
 
 export function ButtonToggle({ todoItem }) {
   const { id, is_completed } = { ...todoItem };
