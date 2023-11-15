@@ -81,6 +81,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: thedolist_production
   username: postgres
   password: <%= ENV["API_DATABASE_PASSWORD"] %>
