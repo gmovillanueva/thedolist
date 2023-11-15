@@ -32,7 +32,7 @@ export function ButtonToggle({ todoItem }) {
                 checked={value}
                 onChange={(event) => updateSubmit(event, onChange)}
                 type='checkbox'
-                className='rounded-full'
+                className='rounded-full border-violet-600 checked:text-violet-600 focus:ring-violet-600'
               />
             </>
           )}></Controller>

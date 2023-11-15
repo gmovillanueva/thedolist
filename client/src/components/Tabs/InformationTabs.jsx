@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { filter } from 'ramda';
 
 import { ButtonFilter } from '@components/Buttons/ButtonFilter.jsx';
-import { ButtonClear } from '@components/Buttons/ButtonClear.jsx';
 import { TaskCard } from '@components/TaskCard/TaskCard.jsx';
 
 export function InformationTabs({ todoList, itemCount }) {
@@ -45,8 +44,8 @@ export function InformationTabs({ todoList, itemCount }) {
 
   return (
     <>
-      <div className='mb-2 flex h-16 w-full justify-between rounded-md bg-violet-600 px-6 align-middle text-sm leading-tight'>
-        <p className='my-auto text-gray-50'>{ReturnString(itemCount)}</p>
+      {/*Top Container*/}
+      <div className='flex h-16 w-full justify-between rounded-t-md bg-violet-600 px-6 align-middle text-sm leading-tight'>
         <ButtonFilter
           funcFilter={filterReset}
           label='All'
@@ -59,14 +58,26 @@ export function InformationTabs({ todoList, itemCount }) {
           funcFilter={filterComplete}
           label='Completed'
         />
-        <ButtonClear />
       </div>
-      {todoData?.map((todo) => (
-        <TaskCard
-          key={todo.id}
-          todoItem={todo}
-        />
-      ))}
+      {/*Task Cards*/}
+      {todoData.length ? (
+        todoData?.map((todo) => (
+          <TaskCard
+            key={todo.id}
+            todoItem={todo}
+          />
+        ))
+      ) : (
+        <>
+          <div className='flex h-16 w-full items-center justify-center border border-x-2 border-violet-600 bg-gray-100 px-6 text-center '>
+            <p className='px-6 py-2 text-violet-600'>No Tasks</p>
+          </div>
+        </>
+      )}
+      {/*Bottom Container*/}
+      <div className='flex h-16 w-full justify-between rounded-b-md bg-violet-600 px-6 align-middle text-sm leading-tight'>
+        <p className='my-auto text-gray-50'>{ReturnString(itemCount)}</p>
+      </div>
     </>
   );
 }

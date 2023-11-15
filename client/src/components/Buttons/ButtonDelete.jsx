@@ -19,7 +19,10 @@ export function ButtonDelete({ id }) {
       <button
         onClick={() => deleteTaskItem()}
         className='p-2 transition-all ease-in hover:scale-105'>
-        <TrashSimple size={24} />
+        <TrashSimple
+          className='fill-violet-600'
+          size={24}
+        />
       </button>
     </>
   );
