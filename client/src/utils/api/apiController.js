@@ -2,7 +2,7 @@ import { isNil, isEmpty, mergeDeepRight } from 'ramda';
 
 const contentTypeJSON = 'application/json';
 
-export const railsAPI = 'http://localhost:3000';
+export const railsAPI = 'https://thedoolist-api.onrender.com';
 
 // Accepts only JSON from any GET
 const DEFAULT_OPTIONS = {
