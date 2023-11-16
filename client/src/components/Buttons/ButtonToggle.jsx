@@ -15,7 +15,12 @@ export function ButtonToggle({ todoItem }) {
       ...todoItem,
       is_completed: event.target.checked,
     };
-    mutate(data, {});
+    mutate(data, {
+      onSuccess: () => {
+        console.log('Task Patched Successfully With:');
+        window.location.reload();
+      },
+    });
   }
 
   return (
@@ -32,10 +37,11 @@ export function ButtonToggle({ todoItem }) {
                 checked={value}
                 onChange={(event) => updateSubmit(event, onChange)}
                 type='checkbox'
-                className='rounded-full border-violet-600 checked:text-violet-600 focus:ring-violet-600'
+                className='rounded-full border-violet-600 bg-gray-100 checked:text-violet-600 focus:ring-violet-600'
               />
             </>
-          )}></Controller>
+          )}
+        ></Controller>
       </form>
     </>
   );

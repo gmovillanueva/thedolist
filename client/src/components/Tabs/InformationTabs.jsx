@@ -17,7 +17,6 @@ export function InformationTabs({ todoList, itemCount }) {
 
   function filterReset() {
     setTodoData(todoList);
-    console.log('Reset Called');
   }
 
   function filterComplete() {
