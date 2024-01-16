@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 export function ButtonDelete({ id }) {
   const { mutate } = useDeleteTask();
+  const deleteButtonID = `button-delete-${id}`;
 
   function deleteTaskItem() {
     mutate(id, {
@@ -18,6 +19,7 @@ export function ButtonDelete({ id }) {
     <>
       <button
         onClick={() => deleteTaskItem()}
+        id={deleteButtonID}
         className='p-2 transition-all ease-in hover:scale-105'
       >
         <TrashSimple

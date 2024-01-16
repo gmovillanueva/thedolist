@@ -71,3 +71,4 @@ next-env.d.ts
 # Zeppelin ignored files
 /ZeppelinRemoteNotebooks/
 .idea
+/.env.dev

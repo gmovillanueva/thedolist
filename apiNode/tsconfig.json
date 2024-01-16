@@ -1,0 +1,60 @@
+{
+  "compilerOptions": {
+    /* Language & Environment */
+    "target": "es2022",
+    "lib": [
+      "ES2022",
+    ],
+    "useDefineForClassFields": true,
+
+    /* Modules */
+    "module": "es2022",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+
+    /* Completeness */
+    "skipLibCheck": true,
+
+    /* Interop Constraints */
+    "isolatedModules": true,
+    "esModuleInterop": true,
+
+    /* Emit */
+    "noEmit": true,
+    "outDir": "./dist",
+    "newLine": "lf",
+
+    /* Type Checking */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+
+    /* Paths */
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@root/*": [
+        "./*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ],
+      "@config/*": [
+        "./src/config/*"
+      ],
+    }
+  },
+  "include": [
+    "src",
+    "src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "ts-node": {
+    "esm": true,
+    "experimentalSpecifierResolution": "node"
+  }
+}

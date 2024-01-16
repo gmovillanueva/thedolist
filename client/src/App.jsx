@@ -8,7 +8,10 @@ function App() {
 
   return (
     <>
-      <body className='h-screen bg-gray-100'>
+      <body
+        data-testid='main-body-test'
+        className='h-screen bg-gray-100'
+      >
         <div className='container mx-auto flex flex-col items-center px-4 py-16 text-center md:px-10 md:py-32 lg:px-32 xl:max-w-3xl'>
           <TextTitle />
           <NewTaskField />
