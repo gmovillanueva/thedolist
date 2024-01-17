@@ -1,11 +1,11 @@
 import { str, num } from 'envalid';
 import serverConfig from '@config/server.config';
-import { Envionments } from '@/enums/environment.enums';
+import { Environments } from '@utils/environment.enums';
 
 const envValidationConfig = {
   NODE_ENV: str({
-    default: Envionments.DEV,
-    choices: [...Object.values(Envionments)],
+    default: Environments.DEV,
+    choices: [...Object.values(Environments)],
   }),
   PORT: num({ default: serverConfig.defaultPort }),
   DATABASE_URL: str(),

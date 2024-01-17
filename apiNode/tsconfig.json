@@ -18,6 +18,7 @@
     /* Interop Constraints */
     "isolatedModules": true,
     "esModuleInterop": true,
+    "experimentalDecorators": true,
 
     /* Emit */
     "noEmit": true,

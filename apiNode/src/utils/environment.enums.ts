@@ -1,10 +1,10 @@
-export enum Envionments {
+export enum Environments {
   PROD = 'production',
   DEV = 'development',
   TEST = 'test',
 }
 
-export enum EnvionmentFile {
+export enum EnvironmentFile {
   DEFAULT = '.env',
   PROD = '.env.prod',
   DEV = '.env.dev',
