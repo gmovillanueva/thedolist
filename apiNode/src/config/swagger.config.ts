@@ -1,6 +1,12 @@
 import path from 'path';
 import serverConfig from '@config/server.config';
 import envConfig from '@/schema/env.schema';
+import {
+  name,
+  version as ver,
+  repository,
+  description as desc,
+} from '@root/package.json';
 
 const {
   api: { basePath, version },
@@ -10,12 +16,14 @@ const {
 const baseDir = path.join(__dirname, '../../');
 
 const swaggerConfig = {
+  openapi: '3.0.0',
   info: {
-    version: '1.0.0',
-    title: 'Rest Api',
-    description: 'Api specs for',
+    title: `${name} API Documentation`,
+    version: `${ver}`,
+    description: `${desc}`,
     license: {
       name: 'MIT',
+      url: repository,
     },
   },
   servers: [

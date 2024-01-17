@@ -1,8 +1,8 @@
 import { type Response } from 'express';
 
-import environment from '@/lib/environmentHandler';
 import winLogger from '@/lib/loggerWinston';
 import statusCodes from '@utils/statusCodes';
+import envVars from '@config/env.config';
 
 abstract class ApiOperations {
   public send<T>(
@@ -11,7 +11,7 @@ abstract class ApiOperations {
     statusCode: number = statusCodes.Ok,
     message: string = 'success'
   ) {
-    if (!environment.isDev()) {
+    if (envVars.env !== 'development') {
       winLogger.info(JSON.stringify(data, null, 2));
     }
 
@@ -26,7 +26,7 @@ abstract class ApiOperations {
     statusCode: number = statusCodes.Ok,
     path: string
   ) {
-    if (!environment.isDev()) {
+    if (envVars.env !== 'development') {
       winLogger.info(`Download file: ${path}`);
     }
 

@@ -1,10 +1,11 @@
 import { existsSync, mkdirSync } from 'fs';
 
-import winston, { createLogger } from 'winston';
+import winston from 'winston';
 
 import serverConfig from '@config/server.config';
-import environment from './environmentHandler';
 import { LOG_DATE_FORMAT } from '@utils/constants';
+
+import envVars from '@config/env.config';
 
 const {
   logs: { dir: logDir, logFile, errorLogFile },
@@ -23,7 +24,7 @@ const fileTransports: winston.transport[] = [
   new winston.transports.File({ filename: `${logDir}/${logFile}` }),
 ];
 
-if (!environment.isDev()) {
+if (envVars.env !== 'development') {
   logTransports.push(...fileTransports);
 }
 
@@ -33,9 +34,9 @@ const logFormattter = printf(({ level, message, label, timestamp }) => {
   return `[${String(label)}] ${String(timestamp)} ${level}: ${String(message)}`;
 });
 
-const winLogger: winston.Logger = createLogger({
+const winLogger: winston.Logger = winston.createLogger({
   format: combine(
-    label({ label: environment.env }),
+    label({ label: envVars.env }),
     timestamp({ format: LOG_DATE_FORMAT }),
     json(),
     prettyPrint({ colorize: true }),

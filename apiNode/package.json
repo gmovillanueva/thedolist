@@ -1,6 +1,7 @@
 {
-  "name": "the-doolist-api",
-  "version": "1.0.0",
+  "name": "the-doolist-node-api",
+  "version": "0.0.3",
+  "repository": "https://github.com/gmovillanueva/thedolist/tree/main/apiNode",
   "description": "Simple API for TheDooList",
   "scripts": {
     "dev:migrate:postgres": "dotenv -e .env.dev -- npx prisma migrate dev",
@@ -20,6 +21,8 @@
   "dependencies": {
     "@prisma/client": "^5.8.0",
     "@types/bcrypt": "^5.0.2",
+    "@types/compression": "^1.7.5",
+    "@types/morgan": "^1.9.9",
     "@types/passport": "^1.0.16",
     "@types/passport-jwt": "^4.0.0",
     "@types/swagger-jsdoc": "^6.0.4",
@@ -42,6 +45,7 @@
     "joi": "^17.11.1",
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.1.0",
+    "morgan": "^1.10.0",
     "nodemailer": "^6.9.8",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",

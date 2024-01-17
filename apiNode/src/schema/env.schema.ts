@@ -10,6 +10,13 @@ const envVarsSchema = Joi.object()
       .valid('production', 'development', 'test')
       .required(),
     PORT: Joi.number().default(3000),
+    JWT_SECRET: Joi.string().required().description('JWT Secret'),
+    JWT_VERIFY_EMAIL_TOKEN_TIMER: Joi.number()
+      .default(15)
+      .description('Time (min) for verify email token to expire.'),
+    JWT_RESET_PASSWORD_TOKEN_TIMER: Joi.number()
+      .default(15)
+      .description('Time (min) for reset password token to expire.'),
   })
   .unknown();
 
@@ -24,4 +31,9 @@ if (error) {
 export default {
   env: envVars.NODE_ENV,
   port: envVars.PORT,
+  jwt: {
+    secret: envVars.JWT_SECRET,
+    emailVerifyEmailTimer: envVars.JWT_VERIFY_EMAIL_TOKEN_TIMER,
+    passwordResetTimer: envVars.JWT_RESET_PASSWORD_TOKEN_TIMER,
+  },
 };

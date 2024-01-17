@@ -1,46 +1,9 @@
-import { PrismaClient } from '@prisma/client';
+import { config as configDotenv } from 'dotenv';
+import expressServer from '@/server';
+import envVars from '@config/env.config';
 
-const prisma = new PrismaClient();
+configDotenv();
 
-async function main() {
-  // ... you will write your Prisma Client queries here
-  const post = await prisma.post.update({
-    where: { id: 1 },
-    data: { completed: true },
-  });
-
-  console.log(post);
-
-  await prisma.user.create({
-    data: {
-      name: 'Alice',
-      email: 'alice@prisma1.io',
-      posts: {
-        create: { title: 'Hello World' },
-      },
-      profile: {
-        create: {
-          bio: 'I like swimming',
-        },
-      },
-    },
-  });
-
-  const allUsers = await prisma.user.findMany({
-    include: {
-      posts: true,
-      profile: true,
-    },
-  });
-  console.dir(allUsers, { depth: null });
-}
-
-main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
-  });
+expressServer.listen(envVars.port, () => {
+  const { port };
+});

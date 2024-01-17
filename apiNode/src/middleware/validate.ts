@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import Joi from 'joi';
 import picker from '@utils/picker';
-import { ApiError } from '@/middleware/errorHandler';
+import { ApiError } from '@lib/apiErrors';
 import statusCodes from '@utils/statusCodes';
 
 const validateSchema =

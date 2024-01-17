@@ -5,7 +5,7 @@ import { cleanEnv } from 'envalid';
 import { EnvironmentFile, Environments } from '@utils/environment.enums';
 import { type CommonEnvKeys } from '@/types/environment.type';
 import { envFileNotFoundError } from '@utils/helpers';
-import envValidationConfig from '@config/env.config';
+import envVars from '@config/env.config';
 import serverConfig from '@config/server.config';
 
 export interface IEnvironment {
@@ -23,7 +23,7 @@ class Environment implements IEnvironment {
   constructor() {
     this._port = 0;
     this._env = <Environments>{};
-    this.port = +process.env!.PORT ?? serverConfig.defaultPort;
+    this.port = envVars.port;
     this.setEnvironment(process.env.NODE_ENV ?? Environments.DEV);
   }
 

@@ -39,6 +39,30 @@
       "@root/*": [
         "./*"
       ],
+      "@middleware/*": [
+        "./src/middleware/*"
+      ],
+      "@validations/*": [
+        "./src/validations/*"
+      ],
+      "@controllers/*": [
+        "./src/controllers/*"
+      ],
+      "@lib/*": [
+        "./src/lib/*"
+      ],
+      "@routes/*": [
+        "./src/routes/*"
+      ],
+      "@schema/*": [
+        "./src/schema/*"
+      ],
+      "@services/*": [
+        "./src/services/*"
+      ],
+      "@types/*": [
+        "./src/types/*"
+      ],
       "@utils/*": [
         "./src/utils/*"
       ],

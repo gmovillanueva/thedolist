@@ -1,44 +1,45 @@
+import util from 'util';
+import { NextFunction, type Request, type Response } from 'express';
+import { ApiError } from '@lib/apiErrors';
+import winLogger from '@/lib/loggerWinston';
 import statusCodes from '@utils/statusCodes';
+import envVars from '@config/env.config';
 
-export interface IApiError extends Error {
-  statusCode: number;
+interface ErrorBody {
+  success: false;
+  message: string;
   rawErrors?: string[];
+  stack?: string;
 }
 
-export class ApiError extends Error implements IApiError {
-  statusCode: number;
-  rawErrors: string[] | undefined;
+const errorHandler = (
+  err: ApiError,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  winLogger.error(`Request Error:
+        \nError:\n${JSON.stringify(err)}
+        \nHeaders:\n${util.inspect(req.headers)}
+        \nParams:\n${util.inspect(req.params)}
+        \nQuery:\n${util.inspect(req.query)}
+        \nBody:\n${util.inspect(req.body)}`);
 
-  constructor(statusCode: number, message: string, rawErrors?: string[]) {
-    super(message);
-    this.statusCode = statusCode;
-    if (rawErrors) {
-      this.rawErrors = rawErrors;
-    }
-    Error.captureStackTrace(this, this.constructor);
+  const status: number = err.statusCode ?? statusCodes.InternalServerError;
+
+  const errorBody: ErrorBody = {
+    success: false,
+    message: err.message,
+    rawErrors: err.rawErrors,
+  };
+
+  if (envVars.env === 'development') {
+    errorBody.stack = err.stack;
   }
-}
 
-export class HTTPBadRequestError extends ApiError {
-  constructor(message: string, errors: string[]) {
-    super(statusCodes.BadRequest, message, errors);
-  }
-}
+  res.status(status).send(errorBody);
 
-export class HTTPInternalServerError extends ApiError {
-  constructor(message: string, errors?: string[]) {
-    super(statusCodes.InternalServerError, message, errors);
-  }
-}
+  next();
+};
 
-export class HTTPUnauthorizedError extends ApiError {
-  constructor(message: string) {
-    super(statusCodes.Unauthorized, message);
-  }
-}
-
-export class HTTPNotFoundError extends ApiError {
-  constructor(message: string, errors?: string[]) {
-    super(statusCodes.NotFound, message, errors);
-  }
-}
+export default errorHandler;

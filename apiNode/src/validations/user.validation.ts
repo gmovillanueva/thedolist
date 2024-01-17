@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import { Role } from '@prisma/client';
-import { password } from '@/validations/custom.validation';
+import { password } from '@validations/custom.validation';
 
 const createUser = {
   body: Joi.object().keys({
