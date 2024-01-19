@@ -1,3 +1,3 @@
-export type * as Environment from './environment.type';
-export type * as Common from './common.types';
-export type * as Decorators from './decorators.type';
+export type * as Common from './common.type';
+export type * as Token from './token.type';
+export type * as PrintRoute from './printRoute.type';

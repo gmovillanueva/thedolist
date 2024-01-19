@@ -5,10 +5,10 @@ import {
 } from 'passport-jwt';
 import { TokenType } from '@prisma/client';
 import prismaClient from '@lib/prisma';
-import envSchema from '@schema/env.schema';
+import envConfig from '@config/env.config';
 
 const jwtOptions = {
-  secretKey: envSchema.jwt.secret,
+  secretOrKey: envConfig.jwt.secret,
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 };
 

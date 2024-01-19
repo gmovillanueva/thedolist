@@ -1,28 +1,64 @@
 import chalk from 'chalk';
-import { EnvironmentFile } from '@utils/environment.enums';
-import { type CommonEnvKeys } from '@/types/environment.type';
 
-const envScriptChalk = (filename: string) => {
-  const scriptChalk = chalk.bgBlueBright.bold;
-  return `${scriptChalk(`cp .env.example ${filename}`)}`;
+import serverConfig from '@config/server.config';
+import envConfig from '@config/env.config';
+import envVars from '@config/env.config';
+import { logWithoutConsole } from '@lib/loggerWinston';
+import expressListRoutes from 'express-list-routes';
+import mainRouter from '@/routes';
+
+const primaryChalk = chalk.green;
+
+const label = (text: string): string => {
+  const labelChalk = chalk.white.bold;
+  const icon = primaryChalk('✔');
+  return `${icon} ${labelChalk(text)}`;
 };
 
-export const envFileNotFoundError = (key: CommonEnvKeys): string => {
-  const divider = chalk.red('~'.repeat(40));
-  const envFile = EnvironmentFile[key];
-  const defaultEnvFile = EnvironmentFile.DEFAULT;
-  const envNotFoundMessage = chalk.red.bold('Environment file not found!');
-  const fileNotFoundMessage = `${chalk.greenBright(
-    defaultEnvFile
-  )} or ${chalk.greenBright(envFile)} is required.`;
+const {
+  docs: { swaggerUIPath, apiDocsPath },
+} = serverConfig;
 
-  return `
-  \r${divider}\n
-  \r${envNotFoundMessage}\n
-  \r${divider}\n
-  \r${fileNotFoundMessage}\n
-  \r${chalk.bold('Try:')}\n
-  \r${envScriptChalk(envFile)}\n
-  \r${envScriptChalk(defaultEnvFile)}\n
-  \r${divider}`;
+const appURL = `${envVars.serverURL}:${envVars.port}`;
+
+export const printInfo = () => {
+  const divider = chalk.blue('~'.repeat(55));
+  /*const urlChalk = chalk.underline.blue;*/
+  const serverSuccessMessage = primaryChalk.bold(
+    'Server successfully started.'
+  );
+  const serverConfigInformation = primaryChalk.bold(
+    'Server Config Information.'
+  );
+  const serverRouteInformation = primaryChalk.bold(
+    'Routes registered on server:'
+  );
+
+  /*  const routesArray = expressListRoutes(mainRouter);*/
+
+  console.log(`
+    \r${divider}\n
+    \r${serverSuccessMessage}\n
+    \r${divider}\n
+    \r${serverConfigInformation}\n
+    \r${label('Port')}: ${envConfig.port}
+    \r${label('ENV')}: ${envConfig.env}
+    \r${label('App URL')}: http://${appURL}
+    \r${label('Api URL')}: http://${appURL}
+    \r${label('Swagger')}: http://${`${appURL}${swaggerUIPath}`}
+    \r${label('API Specs')}: http://${`${appURL}${apiDocsPath}\n`}
+    \r${divider}\n
+    \r${serverRouteInformation}
+  `);
+
+  expressListRoutes(mainRouter);
+
+  console.log(`\n${divider}\n`);
+
+  if (envVars.env !== 'development') {
+    logWithoutConsole({
+      level: 'info',
+      message: `Server started at ${appURL}`,
+    });
+  }
 };

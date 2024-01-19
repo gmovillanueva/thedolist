@@ -1,21 +1,30 @@
 import express from 'express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
-import swaggerConfig from '@config/swagger.config';
+import swaggerDefinition from '@config/swagger.config';
+
+/*import path from 'path';*/
+
+/*const swaggerPath = path.join(process.cwd(), '/docs/');*/
 
 const docRouter = express.Router();
 
-const swaggerSpecs = swaggerJSDoc({
-  swaggerConfig,
-  apis: ['src/docs/*.yml'],
+const swaggerSpec = swaggerJSDoc({
+  swaggerDefinition,
+  apis: ['src/docs/*.yml', 'src/docs/*.ts'],
 });
 
-docRouter.use('/', swaggerUi.serve);
-docRouter.get(
+docRouter.use(
   '/',
-  swaggerUi.setup(swaggerSpecs, {
+  swaggerUi.serve,
+  swaggerUi.setup(swaggerSpec, {
     explorer: true,
   })
 );
+
+/*docRouter.get(
+  '/',
+  )
+);*/
 
 export default docRouter;

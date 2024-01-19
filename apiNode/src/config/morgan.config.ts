@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import morgan from 'morgan';
-import envSchema from '@schema/env.schema';
+import envConfig from '@config/env.config';
 import winLogger from '@lib/loggerWinston';
 
 morgan.token(
@@ -9,7 +9,7 @@ morgan.token(
 );
 
 const getIpFormat = () =>
-  envSchema.env === 'production' ? ':remote-address - ' : '';
+  envConfig.env === 'production' ? ':remote-address - ' : '';
 
 const successFormat = `${getIpFormat()}:method :url :status - :response-time ms`;
 const errorFormat = `${getIpFormat()}:method :url :status - :response-time ms - message: :message`;

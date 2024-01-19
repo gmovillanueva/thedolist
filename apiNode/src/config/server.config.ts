@@ -1,6 +1,5 @@
 import dotenv from 'dotenv';
 import path from 'path';
-import { DEFAULT_PORT } from '@utils/constants';
 
 dotenv.config({ path: path.resolve('.env') });
 
@@ -18,7 +17,6 @@ interface ServerConfig {
     logFile: string;
     errorLogFile: string;
   };
-  defaultPort: number;
 }
 
 const serverConfig: ServerConfig = {
@@ -35,14 +33,9 @@ const serverConfig: ServerConfig = {
     logFile: 'server.log',
     errorLogFile: 'server.error.log',
   },
-  defaultPort: DEFAULT_PORT,
 };
 
 export default serverConfig;
-
-// Server Config
-export const NODE_ENV = process.env.NODE_ENV || 'development';
-export const PORT = process.env.PORT || 4000;
 
 // DB Configuration
 export const DB_NAME = process.env.DB_NAME || '';
